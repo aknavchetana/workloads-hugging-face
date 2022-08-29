@@ -1,0 +1,38 @@
+step to run:
+1-install the dependency in the requirements file.
+2-run the desired file using following command for model size and inference time.
+   ->python3 keyword_spotting.py
+
+for model training and testing->
+
+
+for installation of  s3prl library link:https://github.com/s3prl/s3prl
+
+
+i)-Prepare data
+  Download data
+
+   http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz
+   http://download.tensorflow.org/data/speech_commands_test_set_v0.01.tar.gz
+ii)- Download and unpack Speech Commands
+
+  mkdir -p /CORPORA_DIR/speech_commands_v0.01
+  tar zxf speech_commands_v0.01.tar.gz -C /CORPORA_DIR/speech_commands_v0.01
+  Download and unpack Speech Commands test set
+
+  mkdir -p /CORPORA_DIR/speech_commands_test_set_v0.01
+  tar zxf speech_commands_test_set_v0.01.tar.gz -C /CORPORA_DIR/speech_commands_test_set_v0.01
+
+
+iii)- Change the following path in downstream/speech_commands/config.yaml to yours
+
+   downstream_expert:
+      datarc:
+         speech_commands_root: "/CORPORA_DIR/speech_commands_v0.01/"
+          speech_commands_test_root: "/CORPORA_DIR/speech_commands_test_set_v0.01/"
+
+iv)-Training
+   python3 run_downstream.py -n ExpName -m train -u fbank -d speech_commands
+
+v)-Testing
+  python3 run_downstream.py -m evaluate -e result/downstream/ExpName/dev-best.ckpt

@@ -1,0 +1,5 @@
+librosa
+transformers
+datasets
+torch==1.10
+torchaudio

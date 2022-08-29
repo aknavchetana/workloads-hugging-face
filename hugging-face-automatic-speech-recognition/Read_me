@@ -1,0 +1,4 @@
+step to run:
+1-install the dependency in the requirements file.
+2-run the desired file using following command
+->python3 filename.py

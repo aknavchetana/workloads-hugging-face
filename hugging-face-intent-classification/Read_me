@@ -1,0 +1,37 @@
+step to run:
+1-install the dependency in the requirements file.
+2-run the desired file using following command for inference time and model size:
+->python3 intent.py
+
+for model training and testing:
+
+1-for installation of  s3prl library link:https://github.com/s3prl/s3prl
+
+Prepare data->
+i)-Download and unzip data: Fluent Speech Commands
+
+Official data link: http://fluent.ai:2052/jf8398hf30f0381738rucj3828chfdnchs.tar.gz
+Official website: https://fluent.ai/fluent-speech-commands-a-dataset-for-spoken-language-understanding-research/
+Since the official link might break occasionally, we provide a backup link. If this is not allowed please let us know and we will remove it immediately.
+Please use wget http://140.112.21.28:9000/fluent.tar.gz
+Check the prepared file structure
+
+ii)-fluent_speech_commands_dataset
+   ├── wavs
+   │   └── speakers
+   ├── data
+   │   └── [*.csv]
+   ├── readme.md
+   └── Fluent Speech Commands Public License.pdf
+
+iii)-Change the following paths under downstream/fluent_commands/config.yaml to your own:
+
+  downstream_expert:
+      datarc:
+        file_path: "root directory of fluent_speech_commands_dataset"
+
+iv)-Training->
+   python3 run_downstream.py -n ExpName -m train -u fbank -d fluent_commands
+
+v)-Testing->
+  python3 run_downstream.py -m evaluate -e result/downstream/ExpName/dev-best.ckpt
